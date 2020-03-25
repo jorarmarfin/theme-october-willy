@@ -1,0 +1,162 @@
+title = "Login"
+url = "/login"
+layout = "pagina"
+is_hidden = 0
+
+[account]
+redirect = "cursos-virtuales"
+paramCode = "code"
+forceSecure = 0
+==
+<div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One full width row-->
+            <div class="column one column_fancy_heading">
+                <div class="fancy_heading fancy_heading_icon">
+                    <h2 class="title text-uppercase">INICIO DE SESION</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section sections_style_2">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One Fourth (1/4) Column -->
+            <div class="column one-fourth column_column">
+                <div class="column_attr "></div>
+            </div>
+            <!-- One Second (1/2) Column -->
+            <div class="column one-second column_column">
+                <div class="column_attr align_center">
+                    <h2>Para poder ver o comprar estos cursos debes registrate primero</h2>
+                </div>
+            </div>
+            <!-- Page devider -->
+            <!-- One full width row-->
+            <div class="column one column_divider">
+                <hr class="no_line">
+            </div>
+            <!-- One Fourth (1/4) Column -->
+            <div class="column one-fourth column_column">
+                <div class="column_attr "></div>
+            </div>
+            <!-- One Second (1/2) Column -->
+            <div class="column one-second column_column">
+                <div class="column_attr ">
+                    <div id="contactWrapper">   
+                        {% if not user %}
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    {{ form_ajax('onSignin') }}
+                                        <div class="form-group">
+                                            <label for="userSigninLogin">{{ loginAttributeLabel }}</label>
+                                            <input
+                                                name="login"
+                                                type="text"
+                                                class="form-control"
+                                                id="userSigninLogin"
+                                                placeholder="Ingresar su {{ loginAttributeLabel|lower }}" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="userSigninPassword">Contraseña</label>
+                                            <input
+                                                name="password"
+                                                type="password"
+                                                class="form-control"
+                                                id="userSigninPassword"
+                                                placeholder="Ingresar contraseña" />
+                                        </div>
+
+                                        {% if rememberLoginMode == 'ask' %}
+                                        <div class="form-group">
+                                            <div class="checkbox">
+                                            <label><input name="remember" type="checkbox" value="1">Permanecer conectado</label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        <p></p>
+                                        <button type="submit" class="btn btn-default">INGRESAR</button>
+
+                                    {{ form_close() }}
+                                </div>
+
+                                <div class="col-md-6">
+                                    {% if canRegister %}
+                                    <h3>Registro de nuevos usuarios</h3>
+
+                                    {{ form_ajax('onRegister') }}
+
+                                        <div class="form-group">
+                                            <label for="registerName">Nombre completo</label>
+                                            <input
+                                                name="name"
+                                                type="text"
+                                                class="form-control"
+                                                id="registerName"
+                                                placeholder="Ingresar Nombre completo" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="registerEmail">Email</label>
+                                            <input
+                                                name="email"
+                                                type="email"
+                                                class="form-control"
+                                                id="registerEmail"
+                                                placeholder="Ingresar su email" />
+                                        </div>
+
+                                        {% if loginAttribute == "username" %}
+                                            <div class="form-group">
+                                                <label for="registerUsername">Username</label>
+                                                <input
+                                                    name="username"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="registerUsername"
+                                                    placeholder="Ingresar su username" />
+                                            </div>
+                                        {% endif %}
+
+                                        <div class="form-group">
+                                            <label for="registerPassword">Contraseña</label>
+                                            <input
+                                                name="password"
+                                                type="password"
+                                                class="form-control"
+                                                id="registerPassword"
+                                                placeholder="Choose a password" />
+                                        </div>
+                                        <p></p>
+                                        <button type="submit" class="btn btn-default">REGISTRAR</button>
+
+                                    {{ form_close() }}
+                                {% else %}
+                                    <!-- Registration is disabled. -->
+                                {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        {% else %}
+
+                            {% partial account ~ '::activation_check' %}
+
+                            {% partial account ~ '::update' %}
+
+                            {% partial account ~ '::deactivate_link' %}
+
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

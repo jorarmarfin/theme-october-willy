@@ -3,6 +3,29 @@ url = "/contactame"
 layout = "pagina"
 is_hidden = 0
 ==
+<?php
+function onStart()
+{
+    $this['class_contactame'] = 'current_page_item';
+}
+function onSave(){
+
+    $vars = [
+        'nombre' => Input::get('nombre'), 
+        'email' => Input::get('email'), 
+        'asunto'=>Input::get('asunto'),
+        'mensaje'=>Input::get('mensaje')
+        ];
+
+    Mail::send('Contactame', $vars, function($message) {
+    
+        $message->to('luis.mayta@gmail.com', 'Admin Person');
+    
+    });
+    
+}
+?>
+==
 <div class="section dark " style="padding-top:90px; padding-bottom:40px; background-image:url(http://intranet.willymartinezsanchez.com/sites/default/files/data/page/2018-11/IMG-20180520-WA0006.jpg); background-repeat:no-repeat; background-position:center; background-attachment:fixed; background-size:cover; -webkit-background-size:cover">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
@@ -20,14 +43,16 @@ is_hidden = 0
             <!-- One full width row-->
             <div class="column one column_column">
                 <div class="column_attr align_center">
-                    <p><span class="fontawesome-icon-inline"><i class="fas fa-phone"></i>&nbsp;+51998084210</span></p>
+                    <p><span class="fontawesome-icon-inline">
+                    <i class="fas fa-phone"></i>+51998084210</span></p>
 
-<p><span class="fontawesome-icon-inline"><i class="fas fa-envelope-open-text"></i>&nbsp; correo@willymartinezsanchez.com</span></p>
+                    <p><span class="fontawesome-icon-inline">
+                    <i class="fas fa-envelope-open-text"></i> cristoestavivo@gmail.com</span></p>
 
                     <h3>Mis Redes sociales</h3>
                     <p style="font-size: 30px; line-height: 30px;">
                         <a href="https://www.facebook.com/willy.martinezsanchez"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/channel/UCzBNwydGc47g5yO3owTamCg"><i class="fab fa-youtube"></i></a>
                     </p>
                 </div>
             </div>
@@ -45,10 +70,12 @@ is_hidden = 0
             <div class="column one-second column_column">
                 <div class="column_attr align_center">
                     <h2>ENVIAME UN MENSAJE</h2>
-                    <p>
-                        </p><p><span class="fontawesome-icon-inline"><i class="fas fa-phone"></i>&nbsp;+51998084210</span></p>
+                    <p></p>
+                    <p><span class="fontawesome-icon-inline">
+                        <i class="fas fa-phone"></i>&nbsp;+51998084210</span></p>
 
-<p><span class="fontawesome-icon-inline"><i class="fas fa-envelope-open-text"></i>&nbsp; correo@willymartinezsanchez.com</span></p>
+                        <p><span class="fontawesome-icon-inline">
+                        <i class="fas fa-envelope-open-text"></i>&nbsp; correo@willymartinezsanchez.com</span></p>
 
                     <p></p>
                 </div>
@@ -65,10 +92,10 @@ is_hidden = 0
             <!-- One Second (1/2) Column -->
             <div class="column one-second column_column">
                 <div class="column_attr ">
-
-                    <div id="contactWrapper">
+                    <div id="contactWrapper">   
                         
-                                                <form method="POST" action="http://willymartinezsanchez.com/email" accept-charset="UTF-8"><input name="_token" type="hidden" value="uJPbfBxL0GGV5yQGd8tJUrfIzvOZeFrYE6m4UdD4">
+                       {{ form_open({ request: 'onSave' }) }}
+                            
                             <!-- One Second (1/2) Column -->
                             <div class="column one-second">
                                 <input placeholder="Tu nombre" type="text" name="nombre" id="nombre" size="40" aria-required="true" aria-invalid="false" required="">
@@ -84,38 +111,15 @@ is_hidden = 0
                                 <textarea placeholder="Mensaje" name="mensaje" id="body" style="width:100%;" rows="10" aria-invalid="false" required=""></textarea>
                             </div>
                             <div class="column one">
-                                <script type="text/javascript">
-        var RecaptchaOptions = {"curl_timeout":1,"curl_verify":true};
-    </script>
-<script src="https://www.google.com/recaptcha/api.js?render=onload"></script>
-<div class="g-recaptcha" data-sitekey="6Ldp73kUAAAAAMByRQUNtmybSYJb7w6Pxk5dQBAs"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Ldp73kUAAAAAMByRQUNtmybSYJb7w6Pxk5dQBAs&amp;co=aHR0cDovL3dpbGx5bWFydGluZXpzYW5jaGV6LmNvbTo4MA..&amp;hl=es&amp;v=v1550471573786&amp;size=normal&amp;cb=malievdzld1a" width="304" height="78" role="presentation" name="a-tc0bxpfuky87" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div>
-<noscript>
-    <div style="width: 302px; height: 352px;">
-        <div style="width: 302px; height: 352px; position: relative;">
-            <div style="width: 302px; height: 352px; position: absolute;">
-                <iframe src="https://www.google.com/recaptcha/api/fallback?k=6Ldp73kUAAAAAMByRQUNtmybSYJb7w6Pxk5dQBAs"
-                        frameborder="0" scrolling="no"
-                        style="width: 302px; height:352px; border-style: none;">
-                </iframe>
-            </div>
-            <div style="width: 250px; height: 80px; position: absolute; border-style: none;
-                  bottom: 21px; left: 25px; margin: 0; padding: 0; right: 25px;">
-        <textarea id="g-recaptcha-response" name="g-recaptcha-response"
-                  class="g-recaptcha-response"
-                  style="width: 250px; height: 80px; border: 1px solid #c1c1c1;
-                         margin: 0; padding: 0; resize: none;"></textarea>
-            </div>
-        </div>
-    </div>
-</noscript>
-
+                            
+                           
                             </div>
 
                             
                             <div class="column one" style="text-align: center;">
                                 <input style="background-color: #000046;" type="submit" value="ENVIAR">
                             </div>
-                        </form>
+                        {{ form_close() }}
                     </div>
 
                 </div>

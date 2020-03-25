@@ -1,0 +1,84 @@
+title = "Descargas"
+url = "/descargas"
+layout = "pagina"
+description = "Descargas"
+is_hidden = 0
+
+[builderList]
+modelClass = "LuisMayta\Intranet\Models\Descargas"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
+==
+<?php
+function onStart()
+{
+    $this['class_descargas'] = 'current_page_item';
+}
+?>
+==
+{% set records = builderList.records %}
+{% set displayColumn = builderList.displayColumn %}
+{% set noRecordsMessage = builderList.noRecordsMessage %}
+{% set detailsPage = builderList.detailsPage %}
+{% set detailsKeyColumn = builderList.detailsKeyColumn %}
+{% set detailsUrlParameter = builderList.detailsUrlParameter %}
+
+<div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One full width row-->
+            <div class="column one column_fancy_heading">
+                <div class="fancy_heading fancy_heading_icon">
+                    <h2 class="title">DESCARGAS</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section" style="padding-top:60px; padding-bottom:20px; background-color:#fff">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+
+            <!-- Page devider -->
+            <!-- One full width row-->
+            <div class="column one column_divider">
+                <hr class="no_line">
+                
+<!-- FAQ Area -->
+<div class="section" id="faq flv_sections_16">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One full width row-->
+            <div class="column one column_faq">
+                <div class="faq">
+                    <div class="mfn-acc faq_wrapper open1st">
+                    {% for record in records %}
+                        <div class="question">
+                            <div class="title">
+                                <span class="num">{{loop.index}}</span><i class="icon-plus acc-icon-plus"></i><i class="icon-minus acc-icon-minus"></i>{{record.nombre}}
+                            </div>
+                            <div class="answer">
+                                <p>
+                                    {{record.descripcion}}
+                                </p>
+                                <p><a href="{{record.archivo.path}}" target="_blank"><i class="fas fa-file-pdf"></i> Descargar</a></p>
+                            </div>
+                        </div>
+                     {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                
+            </div>
+                
+        </div>
+    </div>
+</div>

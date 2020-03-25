@@ -1,7 +1,27 @@
 description = "productos"
 
 [viewBag]
+
+[builderList]
+modelClass = "LuisMayta\Intranet\Models\Material"
+scope = "scopeTopCuatro"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "detalle"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+sortColumn = "id"
+sortDirection = "desc"
 ==
+{% set records = builderList.records %}
+{% set displayColumn = builderList.displayColumn %}
+{% set noRecordsMessage = builderList.noRecordsMessage %}
+{% set detailsPage = builderList.detailsPage %}
+{% set detailsKeyColumn = builderList.detailsKeyColumn %}
+{% set detailsUrlParameter = builderList.detailsUrlParameter %}
+
 <div class="section sections_style_3">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
@@ -11,90 +31,29 @@ description = "productos"
                     <h2 style="border-bottom: 4px solid #21437D; display: inline-block; padding: 0 20px 10px;">Material para formación Católica</h2>
                 </div>
             </div>
-                        <!-- One Fourth (1/4) Column -->
+            {% for record in records %}
+            <!-- One Fourth (1/4) Column -->
             <div class="column one-fourth column_icon_box">
                 <!-- Animated area -->
                 <div class="animate zoomIn" data-anim-type="zoomIn">
                     <div class="icon_box icon_position_top no_border">
-                        <a href="http://willymartinezsanchez.com/productos">
-                            <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Diapositiva1.JPG?itok=he6O1D4X" alt="" class="scale-with-grid">
+                        <a href="{{ detailsPage|page({ (detailsUrlParameter): attribute(record, detailsKeyColumn) }) }}">
+                            <div class="image_wrapper"><img src="{{record.imagen.path}}" alt="" class="scale-with-grid">
                             </div>
                             <div class="desc_wrapper">
                                 <div class="desc">
-                                    <h3 style="margin: 0">Curso de Predicadores - Módulo 1</h3>
+                                    <h3 style="margin: 0">{{record.titulo}}</h3>
                                     <p class="themecolor" style="margin: 0 0 5px; font-style: italic;">
-                                        Formacion, 2016
+                                        {{record.tipo}}, {{record.categoria}}, {{record.year}}
                                     </p>
-                                    <p>El Primer Módulo del Curso de Predicadores consta de 10 audios de enseñanza y es un valioso aporte para todos aquellos que quieren formarse responsablemente como mensajeros de la Palabra de Dios.</p>
+                                    <p>{{record.resumen}}</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-                        <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <!-- Animated area -->
-                <div class="animate zoomIn" data-anim-type="zoomIn">
-                    <div class="icon_box icon_position_top no_border">
-                        <a href="http://willymartinezsanchez.com/productos">
-                            <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-11/img001.jpg?itok=0yVgOLkB" alt="" class="scale-with-grid">
-                            </div>
-                            <div class="desc_wrapper">
-                                <div class="desc">
-                                    <h3 style="margin: 0">Jesús Sana tu Corazón</h3>
-                                    <p class="themecolor" style="margin: 0 0 5px; font-style: italic;">
-                                        Libro, 2018
-                                    </p>
-                                    <p>Jesús Sana tu Corazón, es un libro que nos permite recibir sanación interior. Su lectura sencilla nos conduce por el camino de la paz y la reconciliación del corazón.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                        <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <!-- Animated area -->
-                <div class="animate zoomIn" data-anim-type="zoomIn">
-                    <div class="icon_box icon_position_top no_border">
-                        <a href="http://willymartinezsanchez.com/productos">
-                            <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-11/img003.jpg?itok=cL34iRKg" alt="" class="scale-with-grid">
-                            </div>
-                            <div class="desc_wrapper">
-                                <div class="desc">
-                                    <h3 style="margin: 0">Encuentro con Cristo</h3>
-                                    <p class="themecolor" style="margin: 0 0 5px; font-style: italic;">
-                                        Libro, 2018
-                                    </p>
-                                    <p>Encuentro con Cristo, es un libro de reflexión diaria, que de manera sencilla pero profunda nos ayuda meditar a la luz de la Palabra de Dios.</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                        <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <!-- Animated area -->
-                <div class="animate zoomIn" data-anim-type="zoomIn">
-                    <div class="icon_box icon_position_top no_border">
-                        <a href="http://willymartinezsanchez.com/productos">
-                            <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Curso%20Introducci%C3%B3n%20a%20la%20Biblia.jpg?itok=rbDabjru" alt="" class="scale-with-grid">
-                            </div>
-                            <div class="desc_wrapper">
-                                <div class="desc">
-                                    <h3 style="margin: 0">Curso de Introducción a la Biblia</h3>
-                                    <p class="themecolor" style="margin: 0 0 5px; font-style: italic;">
-                                        Formacion, 2016
-                                    </p>
-                                    <p>El Curso de Introducción a la Biblia&nbsp;&nbsp;consta de 10 audios de enseñanza y es una gran herramienta para introducirnos en una lectura firme y apasionante de la Sagrada Escritura.
-                                </p></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                    </div>
+            {% endfor %}
+        </div>
     </div>
 </div>

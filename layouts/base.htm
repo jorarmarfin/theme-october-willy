@@ -30,7 +30,14 @@ default = 0
     <link rel='stylesheet' href='{{ "assets/css/structure.css"| theme }}'>
     <link rel='stylesheet' href='{{ "assets/css/book.css"| theme }}'>
     <link rel='stylesheet' href='{{ "assets/css/custom.css"| theme }}'>
-
+    
+    <!-- add to any -->
+    <script>
+    var a2a_config = a2a_config || {};
+    a2a_config.locale = "es";
+    </script>
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+    
     <!-- Smartsupp Live Chat script -->
     <script type="text/javascript">
         var _smartsupp = _smartsupp || {};
@@ -66,7 +73,7 @@ default = 0
                     <div class="top_bar_left">
                         <!-- Logo-->
                         <div class="logo">
-                            <h1><a id="logo" href="/" title="Willy Martinez Sanchez"><img class="scale-with-grid" src="{{ 'assets/images/book.png'| theme }}" alt="Willy Martinez Sanchez" /></a></h1>
+                            <h1><a id="logo" href="/" title="Willy Martinez Sanchez"><img class="scale-with-grid" src="{{ 'logo.png'| media }}" alt="Willy Martinez Sanchez" /></a></h1>
                         </div>
                         <!-- Main menu-->
                         {% partial 'menu' %}
@@ -140,7 +147,7 @@ default = 0
                 var retinaEl = jQuery("#logo img");
                 var retinaLogoW = retinaEl.width();
                 var retinaLogoH = retinaEl.height();
-                retinaEl.attr("src", "images/retina-book.png").width(retinaLogoW).height(retinaLogoH)
+                retinaEl.attr("src", "{{ 'assets/images/book.png'| theme }}").width(retinaLogoW).height(retinaLogoH)
             }
         });
     </script>

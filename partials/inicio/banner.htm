@@ -1,17 +1,35 @@
 description = "Banner"
 
 [viewBag]
+
+[builderList]
+modelClass = "LuisMayta\Intranet\Models\Banner"
+scope = "scopePrincipal"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "-"
+detailsUrlParameter = "id"
+pageNumber = "{{ :page }}"
 ==
-<div class="section full-screen mensaje" id="start" style="padding: 0px; background-color: rgb(29, 24, 19); background-image: url(&quot;http://intranet.willymartinezsanchez.com/sites/default/files/data/mensajes/2018-12/20180826_182912_0001.png&quot;); background-repeat: no-repeat; background-position: center center; background-attachment: fixed; background-size: cover; min-height: 337px;">
+{% set records = builderList.records %}
+{% set displayColumn = builderList.displayColumn %}
+{% set noRecordsMessage = builderList.noRecordsMessage %}
+{% set detailsPage = builderList.detailsPage %}
+{% set detailsKeyColumn = builderList.detailsKeyColumn %}
+{% set detailsUrlParameter = builderList.detailsUrlParameter %}
+
+{% for record in records %}
+<div class="section full-screen mensaje" id="start" style="padding: 0px; background-color: rgb(29, 24, 19); background-image: url({{ record.fondo.path }}); background-repeat: no-repeat; background-position: center center; background-attachment: fixed; background-size: cover; min-height: 337px;">
     <div class="section_wrapper clearfix" style="padding-top: 60px; padding-bottom: 40px;">
         <div class="items_group clearfix">
             <!-- One Second (1) Column -->
             <div class="column one column_column">
                 <div class="column_attr animate fadeInLeft" data-anim-type="fadeInLeft">
-                    <h2 style="color: #fff; margin-bottom: 90px; font-family: italic; margin-left: 26rem;">"Si uno escucha estas palabras mías y las pone en práctica, dirán de él: aquí tienen al hombre sabio y prudente, que edificó su casa sobre roca"
-Mateo 7,24</h2>      
+                    <h2 style="color: #fff; margin-bottom: 90px; font-family: italic; margin-left: 26rem;">{{ record.frase }}</h2>    
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endfor %}

@@ -3,7 +3,29 @@ url = "/"
 layout = "base"
 is_hidden = 0
 ==
+<?php
+function onStart()
+{
+    $this['class_inicio'] = 'current_page_item';
+}
+?>
+==
 {% partial 'inicio/banner' %}
+<a href="#popup-1" rel="prettyphoto" class="popup-link button button_js">
+    <span class="button_label">Click to open Popup</span>
+</a>
+ 
+<div id="popup-1" class="popup-content">
+    <div class="popup-inner">
+        <div class="image_frame image_item no_link scale-with-grid alignnone has_border">
+            <div class="image_wrapper">
+                <img class="scale-with-grid" src="images/img.jpg" alt="img">
+            </div>
+        </div>
+        <hr class="no_line">
+        Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellen tesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies.
+    </div>
+</div> 
 {% partial 'inicio/productos' %}
 {% partial 'inicio/frase1' %}
 {% partial 'inicio/biografia' %}

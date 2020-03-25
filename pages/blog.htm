@@ -2,100 +2,98 @@ title = "blog"
 url = "/blog"
 layout = "pagina"
 is_hidden = 0
+
+[builderList]
+modelClass = "LuisMayta\Intranet\Models\Blog"
+scope = "-"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "post"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
 ==
+<?php
+function onStart()
+{
+    $this['class_blog'] = 'current_page_item';
+}
+?>
+==
+{% set records = builderList.records %}
+{% set detailsPage = builderList.detailsPage %}
+{% set detailsKeyColumn = builderList.detailsKeyColumn %}
+{% set detailsUrlParameter = builderList.detailsUrlParameter %}
+
+
 <div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
             <!-- One full width row-->
             <div class="column one column_fancy_heading">
                 <div class="fancy_heading fancy_heading_icon">
-                    <h2 class="title">Blog</h2>
+                    <h2 class="title">VIDEOS, REFLEXIONES, NOTICIAS Y MUCHO MÁS</h2>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- detailsPage|page({ (detailsUrlParameter): attribute(record, detailsKeyColumn) }) -->
 <div class="section" style="padding-top:60px; padding-bottom:20px; background-color:#fff">
     <div class="section_wrapper clearfix">
-        <div class="items_group clearfix">
-                            
-            <!-- One Third (1/3) Column -->
-            <div class="column one-third column_image">
-                <div class="image_frame no_link scale-with-grid no_border aligncenter">
-                    <div class="image_wrapper">
-                        <a href="" class="" title="Jornada Para Parejas" data-rel="prettyPhoto[product-gallery]">
-                            <div class="mask"></div><img width="236" src="" class="" alt="Jornada Para Parejas" title="Jornada Para Parejas">
-                        </a>
+        <div class="items_group clearfix">            
+                <!-- One Second (1/2) Column -->
+                <div class="column one-second column_image">
+                    <div class="image_frame no_link scale-with-grid no_border aligncenter">
+                        <div class="image_wrapper"><img class="scale-with-grid" src="{{records[0].imagen.path}}" alt="">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- Two Third (2/3) Column -->
-            <div class="column two-third column_column">
-                <div class="column_attr ">
-                    <h2 style="margin-bottom: 7px; margin-top: 7px;">Jornada Para Parejas</h2>
-                    <p class="big themecolor">
-                        23-03-2019
-                    </p>
-                    <p>Jornada Para matrimonios casados por civil y/o religioso, convivientes, novios o enamorados mayores de edad.</p>
+                <!-- One Second (1/2) Column -->
+                <div class="column one-second column_column">
+                    <div class="column_attr ">
+                        <h2 style="margin-bottom: 7px; margin-top: 15px;">{{records[0].titulo}}</h2>
+                        <p class="big themecolor">
+                            {{records[0].tipo}}
+                        </p>
+                        <p>
+                            {{records[0].descripcion| raw}}
+                        </p>
+                        <hr class="no_line hrmargin_b_20">
+                        
+                        <a class="mfn-link mfn-link-4 " href="{{ detailsPage|page({ (detailsUrlParameter): attribute(records[0], detailsKeyColumn) }) }}" data-hover="READ MORE"><span data-hover="READ MORE">Detalles</span></a>
+                      
+                    </div>
                 </div>
-            </div>
             <!-- Page devider -->
             <!-- One full width row-->
             <div class="column one column_divider">
                 <hr class="no_line">
             </div>
-                            
-            <!-- One Third (1/3) Column -->
-            <div class="column one-third column_image">
-                <div class="image_frame no_link scale-with-grid no_border aligncenter">
-                    <div class="image_wrapper">
-                        <a href="http://intranet.willymartinezsanchez.com/sites/default/files/data/eventos/2019-03/20190301_153146_0001.png" class="" title="Jornada Para Parejas" data-rel="prettyPhoto[product-gallery]">
-                            <div class="mask"></div><img width="236" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2019-03/20190301_153146_0001.png?itok=6UxtIg6H" class="" alt="Jornada Para Parejas" title="Jornada Para Parejas">
-                        </a>
+            {% for record in records %}     
+                {% if loop.index0!=0 %}
+                    <!-- One Fourth (1/4) Column -->
+                    <div class="column one-fourth column_icon_box">
+                        <div class="icon_box icon_position_top no_border">
+                            <a href="{{ detailsPage|page({ (detailsUrlParameter): attribute(record, detailsKeyColumn) }) }}">
+                                <div class="image_wrapper"><img src="{{record.imagen.path}}" alt="" class="scale-with-grid">
+                                </div>
+                                <div class="desc_wrapper">
+                                    <div class="desc">
+                                        <h3 style="margin: 0">{{record.titulo}}</h3>
+                                        <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
+                                            {{record.tipo}}<br>
+                                            {{record.precio}}
+                                        </p>
+                                        {{record.resumen}}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- Two Third (2/3) Column -->
-            <div class="column two-third column_column">
-                <div class="column_attr ">
-                    <h2 style="margin-bottom: 7px; margin-top: 7px;">Jornada Para Parejas</h2>
-                    <p class="big themecolor">
-                        23-03-2019
-                    </p>
-                    Jornada Para matrimonios casados por civil y/o religioso, convivientes, novios o enamorados mayores de edad.
-                </div>
-            </div>
-            <!-- Page devider -->
-            <!-- One full width row-->
-            <div class="column one column_divider">
-                <hr class="no_line">
-            </div>
-                            
-            <!-- One Third (1/3) Column -->
-            <div class="column one-third column_image">
-                <div class="image_frame no_link scale-with-grid no_border aligncenter">
-                    <div class="image_wrapper">
-                        <a href="http://intranet.willymartinezsanchez.com/sites/default/files/data/eventos/2019-02/20190220_025911_0001.png" class="" title="CURSO GRATUITO DE CARISMAS" data-rel="prettyPhoto[product-gallery]">
-                            <div class="mask"></div><img width="236" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2019-02/20190220_025911_0001.png?itok=-Ycj4ox5" class="" alt="CURSO GRATUITO DE CARISMAS" title="CURSO GRATUITO DE CARISMAS">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- Two Third (2/3) Column -->
-            <div class="column two-third column_column">
-                <div class="column_attr ">
-                    <h2 style="margin-bottom: 7px; margin-top: 7px;">CURSO GRATUITO DE CARISMAS</h2>
-                    <p class="big themecolor">
-                        16-03-2019
-                    </p>
-                    <p>El Curso Taller de Carismas 3 es una propuesta de formación para incrementar e impulsar el uso de los Carismas. De esta manera contribuimos a extender la cultura de Pentecostés.</p>
-                </div>
-            </div>
-            <!-- Page devider -->
-            <!-- One full width row-->
-            <div class="column one column_divider">
-                <hr class="no_line">
-            </div>
-                    </div>
+                {% endif %}
+            {% endfor %}                                      
+        </div>
     </div>
 </div>

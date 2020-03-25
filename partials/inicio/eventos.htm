@@ -1,100 +1,64 @@
 description = "eventos"
 
 [viewBag]
+
+[builderList]
+modelClass = "LuisMayta\Intranet\Models\Evento"
+scope = "scopeEventos"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = 4
+detailsPage = "evento"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+sortColumn = "id"
+sortDirection = "desc"
 ==
+{% set records = builderList.records %}
+{% set displayColumn = builderList.displayColumn %}
+{% set noRecordsMessage = builderList.noRecordsMessage %}
+{% set detailsPage = builderList.detailsPage %}
+{% set detailsKeyColumn = builderList.detailsKeyColumn %}
+{% set detailsUrlParameter = builderList.detailsUrlParameter %}
+
+
+
 <div class="section" style="padding-top:50px; padding-bottom:60px; background-color:#ededed">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
             <!-- One full width row-->
             <div class="column one column_column">
                 <div class="column_attr align_center">
-                    <h2 class="hrmargin_0">PRÓXIMOS EVENTOS!</h2>
+                    <h2 class="hrmargin_0">PRÓXIMOS EVENTOS!!</h2>
                 </div>
             </div>
-                            
+            {% for record in records %} 
             <!-- One Third (1/2) Column -->
             <div class="column one-second column_article_box">
                 <div class="article_box">
                     <!-- Animated area -->
                     <div class="animate zoomIn" data-anim-type="zoomIn">
-                        <a href="http://willymartinezsanchez.com/eventos">
+                        <a href="{{ detailsPage|page({ (detailsUrlParameter): attribute(record, detailsKeyColumn) }) }}">
                             <div class="photo_wrapper">
-                                <img class="scale-with-grid" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2019-02/20190220_025911_0001.png?itok=-Ycj4ox5" alt="CURSO GRATUITO DE CARISMAS">
+                                <img class="scale-with-grid" src="{{record.imagen.path}}" alt="{{record.titulo}}">
                             </div>
                             <div class="desc_wrapper">
                                 <p>
-                                    <i class="fas fa-calendar-alt"></i>  09-03-2019
+                                    <i class="fas fa-calendar-alt"></i>  {{record.fechainicio|date('d-m-Y')}}
                                 </p>
-                                <h4>CURSO GRATUITO DE CARISMAS </h4>El Curso Taller de Carismas 3 es una propuesta de formación para incrementar e impulsar el uso de los Carismas. De esta manera contribuimos a extender la cultura de Pentecostés.
+                                <h4>{{record.titulo}} </h4>
+                                {{record.resumen}}
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-                            
-            <!-- One Third (1/2) Column -->
-            <div class="column one-second column_article_box">
-                <div class="article_box">
-                    <!-- Animated area -->
-                    <div class="animate zoomIn" data-anim-type="zoomIn">
-                        <a href="http://willymartinezsanchez.com/eventos">
-                            <div class="photo_wrapper">
-                                <img class="scale-with-grid" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2018-12/20181215_162923_0001.png?itok=Xme3h7O0" alt="Taller de Carismas 2">
-                            </div>
-                            <div class="desc_wrapper">
-                                <p>
-                                    <i class="fas fa-calendar-alt"></i>  21-02-2019
-                                </p>
-                                <h4>Taller de Carismas 2 </h4>El Curso Taller de Carismas 2 es la continuación de un plan y proceso de formación, que tiene por objetivo fomentar e incrementar el ejercicio de los Carismas en los grupos de oracion y así extender la cultura de Pentecostés en la Iglesia. Mediante 4 temas de manera bíblica y práctica, con ayuda de material de apoyo, cada participante tendrá oportunidad de abrirse a los Carismas. El Curso es abierto y sin restricciones para todo aquel que tenga el interés en el tema. Bendiciones Para inscripciones escribir a: cristoestavivo@gmail.com. O enviar mensaje de whatsapp al: 942045726.
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                            
-            <!-- One Third (1/2) Column -->
-            <div class="column one-second column_article_box">
-                <div class="article_box">
-                    <!-- Animated area -->
-                    <div class="animate" data-anim-type="zoomIn">
-                        <a href="http://willymartinezsanchez.com/eventos">
-                            <div class="photo_wrapper">
-                                <img class="scale-with-grid" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2018-12/Poster.png?itok=piSC1dxR" alt="Retiro Siempre Firmes en la Fe">
-                            </div>
-                            <div class="desc_wrapper">
-                                <p>
-                                    <i class="fas fa-calendar-alt"></i>  18-01-2019
-                                </p>
-                                <h4>Retiro Siempre Firmes en la Fe </h4>"Siempre Firmes en la Fe" es un Retiro espiritual para líderes católicos y agentes de pastoral que quieren renovar y perseverar en su fe. Cada participante podrá tener espacios de reflexión, oración personal, confesiones, guía y consejería espiritual. 
-La Fecha es: 18,19,20 de enero del 2019. 
-Puedes inscribirte llamando al: 942045726. 
-El costo por persona es de S/.80 soles. 
-Lugar: Casa de Retiro Diocesana Sagrada Familia - Lurín.
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                            
-            <!-- One Third (1/2) Column -->
-            <div class="column one-second column_article_box">
-                <div class="article_box">
-                    <!-- Animated area -->
-                    <div class="animate" data-anim-type="zoomIn">
-                        <a href="http://willymartinezsanchez.com/eventos">
-                            <div class="photo_wrapper">
-                                <img class="scale-with-grid" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/eventos/2018-12/IMG_20181216_164205_406.jpg?itok=wSJ9z6n_" alt="Retiro de Parejas">
-                            </div>
-                            <div class="desc_wrapper">
-                                <p>
-                                    <i class="fas fa-calendar-alt"></i>  15-02-2019
-                                </p>
-                                <h4>Retiro de Parejas </h4>El Retiro "Semillas para un Matrimonio Feliz"está dirigido a parejas: Matrimonios(civil o religioso), novios o convivientes que quieren tener un acercamiento como pareja y poner en clave de Dios su relación. Serán bellos momentos de reflexión, oración y compartir. Para Inscripciones llamar: 942045726. Correo: cristoestavivo@gmail.com Costo por persona: S/.80.00 soles. Lugar: Casa de Retiros Sagrada Familia - Lurin.
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-                    </div>
+            {% if loop.index%2==0 %}
+                    <div class="column one column_divider"><hr class="no_line"></div>
+            {% endif %}
+            {% endfor %}        
+
+        </div>
     </div>
 </div>

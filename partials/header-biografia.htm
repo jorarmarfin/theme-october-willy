@@ -1,0 +1,37 @@
+description = "cabecera de biografia"
+
+[viewBag]
+snippetCode = "header-bio"
+snippetName = "Cabecera Biografia"
+snippetProperties[imagenfondo][title] = "imagenfondo"
+snippetProperties[imagenfondo][type] = "string"
+snippetProperties[imagenfondo][default] = ""
+snippetProperties[imagenfondo][options][] = ""
+==
+<?php
+function onStart()
+{
+    $this['class_biografia'] = 'current_page_item';
+}
+?>
+==
+<div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#020202; background-image:url({{imagenfondo}}); background-repeat:no-repeat; background-position:center top; background-attachment:fixed;">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One Second (1/2) Column -->
+            <div class="column one-second column_column">
+                <div class="column_attr ">
+                    <h2 style="font-weight: bold; font-family: 'Poiret One'; font-size: 70px; line-height: 76px; margin-bottom: 40px; color: #fff;">
+                        WILLY MARTINEZ
+                        <br>
+                        SÁNCHEZ</h2>
+                    <h3 style="color: #b38534; margin-bottom: 40px; font-family: italic;" class="themecolor">"Siempre firmes en la fe".</h3>
+                    <h3 style="color: #fff;">INFORMACIÓN GENERAL</h3>
+                    <p style="color: #fff;">
+                        Nació en Lima Perú en 1965, casado con María Cuya, está dedicado a tiempo completo a predicar la Palabra de Dios. Es miembro del Movimiento de la Renovación Carismática Católica del Perú desde 1982.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

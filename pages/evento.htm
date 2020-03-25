@@ -1,0 +1,150 @@
+title = "evento"
+url = "/evento/:slug"
+layout = "pagina"
+is_hidden = 0
+
+[builderDetails]
+modelClass = "LuisMayta\Intranet\Models\Evento"
+identifierValue = "{{ :slug }}"
+modelKeyColumn = "slug"
+displayColumn = "id"
+notFoundMessage = "Record not found"
+==
+<?php
+use LuisMayta\Intranet\Models\Evento;
+
+function onStart()
+{
+    $this['class_eventos'] = 'current_page_item';
+    $evento = Evento::where('slug',$this->param('slug'))->get();
+    $this['title_page'] = $evento[0]->titulo;
+    $this['og_url'] = 'http://willymartinezsanchez.com/evento/'.$evento[0]->slug;
+    $this['og_img'] = $evento[0]->imagen->path;
+    $this['og_descripcion'] = $evento[0]->resumen;
+}
+function onSave()
+{
+    Db::table('luismayta_intranet_registro')->insert(
+        [
+            'evento' => Input::get('evento'),
+            'nombre' => Input::get('nombre'),
+            'email' => Input::get('email'),
+            'telefono' => Input::get('telefono'),
+            'distrito' => Input::get('distrito'),
+            'mensaje' => Input::get('mensaje'),
+        ]
+    );
+}
+?>
+==
+{% set record = builderDetails.record %}
+{% set displayColumn = builderDetails.displayColumn %}
+{% set notFoundMessage = builderDetails.notFoundMessage %}
+
+<div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One full width row-->
+            <div class="column one column_fancy_heading">
+                <div class="fancy_heading fancy_heading_icon">
+                    <h2 class="title">EVENTOS CATÓLICO</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section" style="padding-top:60px; padding-bottom:20px; background-color:#fff">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <!-- One Second (1/2) Column -->
+            <div class="column one-second column_image">
+                <div class="image_frame no_link scale-with-grid no_border aligncenter">
+                    <div class="image_wrapper"><img class="scale-with-grid" src="{{record.imagen.path}}" alt="{{record.titulo}}">
+                    </div>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+                        <a class="a2a_button_facebook"></a>
+                        <a class="a2a_button_twitter"></a>
+                        <a class="a2a_button_pinterest"></a>
+                        <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- One Second (1/2) Column -->
+            <div class="column one-second column_column">
+                <div class="column_attr ">
+                    <h2 style="margin-bottom: 7px; margin-top: 15px;">{{record.titulo}}</h2>
+                    <p></p>
+                    <p class="big themecolor">
+                        Fecha: {{record.fechainicio|date('d-m-y')}} Hora: {{record.fechainicio| date('h:i:s')}}
+                    </p>
+                    <p>
+                        {{record.descripcion|raw}}
+                    </p>
+                    <h3>Ubicación</h3>
+                    <p>{{record.ubicacion | raw}}</p>
+                    <hr class="no_line hrmargin_b_20">
+                    <p style="font-style: italic;">
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section mcb-section  section-border-top " style="padding-top:40px; padding-bottom:0px; background-color:#f9f9f9">
+    <div class="section_wrapper mcb-section-inner">
+        <div class="wrap mcb-wrap one valign-top clearfix">
+            <div class="mcb-wrap-inner">
+                   
+                <div class="column mcb-column one-third column_column">
+                    <div class="column_attr clearfix align_right">
+                        <h2>SEPARA TU CUPO</h2>
+                        <p class="big">
+                            Ingrese sus datos para confirmar tu asistencia y tener listo el material que te entregaremos</span> !
+                        </p>
+                        <p class="big" style="color: #a8a8a8;">
+                            Mis redes sociales:
+                        </p>
+                        <a href="https://www.facebook.com/willy.martinezsanchez" class="icon_bar  icon_bar_facebook icon_bar_small" target="_blank">
+                            <span class="t"><i class="fab fa-facebook-f"></i></span>
+                            <span class="b"><i class="fab fa-facebook-f"></i></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="column mcb-column two-third column_column">
+                    <div id="contactWrapper">
+                        {{form_open({request: 'onSave'})}}
+                            <!-- One Second (1/2) Column -->
+                            <div class="column one-second">
+                                <input placeholder="Tu nombre" type="text" name="nombre" id="nombre" size="40" aria-required="true" aria-invalid="false" required="">
+                            </div>
+                            <!-- One Second (1/2) Column -->
+                            <div class="column one-second">
+                                <input placeholder="Tu e-mail" type="email" name="email" id="email" size="40" aria-required="true" aria-invalid="false" required="">
+                            </div>
+                            <div class="column one-second">
+                                <input placeholder="Tu telefono" type="text" name="telefono" id="telefono" size="40" aria-required="true" aria-invalid="false" required="">
+                            </div>
+                            <!-- One Second (1/2) Column -->
+                            <div class="column one-second">
+                                <input placeholder="Distrito" type="text" name="distrito" id="distrito" size="40" aria-required="true" aria-invalid="false" required="">
+                            </div>
+                            <div class="column one">
+                                <textarea placeholder="Mensaje" name="mensaje" id="body" style="width:100%;" rows="10" aria-invalid="false" required=""></textarea>
+                            </div>
+                            <div class="column one">
+                                <input type="hidden" name="evento" id="evento" value="{{record.titulo}}">
+                            </div>
+                            <div class="column one">
+                                <input style="background-color: #000046;" type="submit" value="ENVIAR">
+
+                            </div>
+                        {{form_close()}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

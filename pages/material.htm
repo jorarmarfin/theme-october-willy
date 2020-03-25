@@ -2,7 +2,51 @@ title = "Material"
 url = "/material"
 layout = "pagina"
 is_hidden = 0
+
+[builderList Destacado]
+modelClass = "LuisMayta\Intranet\Models\Material"
+scope = "scopeDestacado"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = 1
+detailsPage = "detalle"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+sortColumn = "id"
+
+[builderList Materiales]
+modelClass = "LuisMayta\Intranet\Models\Material"
+scope = "scopeMateriales"
+scopeValue = "{{ :scope }}"
+displayColumn = "id"
+noRecordsMessage = "No records found"
+detailsPage = "detalle"
+detailsKeyColumn = "slug"
+detailsUrlParameter = "slug"
+pageNumber = "{{ :page }}"
+sortColumn = "id"
+sortDirection = "desc"
 ==
+<?php
+function onStart()
+{
+    $this['class_material'] = 'current_page_item';
+}
+?>
+==
+{% set records = Destacado.records %}
+{% set detailsPage = Destacado.detailsPage %}
+{% set detailsKeyColumn = Destacado.detailsKeyColumn %}
+{% set detailsUrlParameter = Destacado.detailsUrlParameter %}
+
+{% set records2 = Materiales.records %}
+{% set detailsPage2 = Materiales.detailsPage %}
+{% set detailsKeyColumn2 = Materiales.detailsKeyColumn %}
+{% set detailsUrlParameter2 = Materiales.detailsUrlParameter %}
+
+
+
 <div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
@@ -18,229 +62,61 @@ is_hidden = 0
 <div class="section" style="padding-top:60px; padding-bottom:20px; background-color:#fff">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
+        {% for record in records %}
             <!-- One Second (1/2) Column -->
             <div class="column one-second column_image">
                 <div class="image_frame no_link scale-with-grid no_border aligncenter">
-                    <div class="image_wrapper"><img class="scale-with-grid" src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/imagen_536x792_/public/data/productos/2019-03/tapa%20liderazgo%20es%20servicio.jpg?itok=pSjAN1Xe" alt="">
+                    <div class="image_wrapper"><img class="scale-with-grid" src="{{record.imagen.path}}" alt="">
                     </div>
                 </div>
             </div>
             <!-- One Second (1/2) Column -->
             <div class="column one-second column_column">
                 <div class="column_attr ">
-                    <h2 style="margin-bottom: 7px; margin-top: 15px;">Libro Liderazgo es Servicio - Enfoque Bíblico</h2>
+                    <h2 style="margin-bottom: 7px; margin-top: 15px;">{{record.titulo}}</h2>
                     <p class="big themecolor">
-                        Libro, 2019
+                        {{record.tipo}}, {{record.year}}
                     </p>
                     <p>
-                        El verdadero propósito del liderazgo es servir a la comunidad, mediante este libro podemos reconocer el fundamento bíblico que todo discípulo de Jesucristo debe tener en cuenta cuando ejerce un rol como líder.
+                        {{record.descripcion| raw}}
                     </p>
-                    <p class="hrmargin_b_30">
-                        Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu, luctus et interdum adipiscing wisi. Aliquam erat ac ipsum. Integer aliquam purus. Quisque lorem tortor fringilla sed, vestibulum id.
-                    </p>
-                    <div class="progress_icons" data-active="8" data-color="">
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon themebg"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon"><i class="fas fa-star"></i></span>
-                        <span class="progress_icon"><i class="fas fa-star"></i></span>
-                    </div>
                     <hr class="no_line hrmargin_b_20">
-                    <p style="font-style: italic;">
-                        
-                    </p>
+                    
+                    <a class="mfn-link mfn-link-4 " href="{{ detailsPage|page({ (detailsUrlParameter): attribute(record, detailsKeyColumn) }) }}" data-hover="READ MORE"><span data-hover="READ MORE">Detalles</span></a>
+                  
                 </div>
             </div>
+            {% endfor %}
             <!-- Page devider -->
             <!-- One full width row-->
             <div class="column one column_divider">
                 <hr class="no_line">
             </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/83">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2019-03/tapa%20liderazgo%20es%20servicio.jpg?itok=dVd8JIxN" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Libro Liderazgo es Servicio - Enfoque Bíblico</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Libro, 2019 <br>
-                                    S/20.00
-                                </p>
-                                El verdadero propósito del liderazgo es servir a la comunidad, mediante este libro podemos reconocer el fundamento bíblico que todo discípulo de Jesucristo debe tener en cuenta cuando ejerce un rol como líder.
+            {% for record2 in records2 %}                
+                <!-- One Fourth (1/4) Column -->
+                <div class="column one-fourth column_icon_box">
+                    <div class="icon_box icon_position_top no_border">
+                        <a href="{{ detailsPage2|page({ (detailsUrlParameter2): attribute(record2, detailsKeyColumn2) }) }}">
+                            <div class="image_wrapper"><img src="{{record2.imagen.path}}" alt="" class="scale-with-grid">
                             </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/37">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Diapositiva1.JPG?itok=he6O1D4X" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Curso de Predicadores - Módulo 1</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2016 <br>
-                                    S/70.00
-                                </p>
-                                El Primer Módulo del Curso de Predicadores consta de 10 audios de enseñanza y es un valioso aporte para todos aquellos que quieren formarse responsablemente como mensajeros de la Palabra de Dios.
+                            <div class="desc_wrapper">
+                                <div class="desc">
+                                    <h3 style="margin: 0">{{record2.titulo}}</h3>
+                                    <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
+                                        {{record2.tipo}},{{record2.categoria}} {{record2.year}} <br>
+                                        {{record2.precio}}
+                                    </p>
+                                    {{record2.resumen}}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/26">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-11/img001.jpg?itok=0yVgOLkB" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Jesús Sana tu Corazón</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Libro, 2018 <br>
-                                    S/8.00
-                                </p>
-                                <p>Jesús Sana tu Corazón, es un libro que nos permite recibir sanación interior. Su lectura sencilla nos conduce por el camino de la paz y la reconciliación del corazón.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/25">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-11/img003.jpg?itok=cL34iRKg" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Encuentro con Cristo</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Libro, 2018 <br>
-                                    S/13.00
-                                </p>
-                                <p>Encuentro con Cristo, es un libro de reflexión diaria, que de manera sencilla pero profunda nos ayuda meditar a la luz de la Palabra de Dios.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/21">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Curso%20Introducci%C3%B3n%20a%20la%20Biblia.jpg?itok=rbDabjru" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Curso de Introducción a la Biblia</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2016 <br>
-                                    S/70.00
-                                </p>
-                                <p>El Curso de Introducción a la Biblia&nbsp;&nbsp;consta de 10 audios de enseñanza y es una gran herramienta para introducirnos en una lectura firme y apasionante de la Sagrada Escritura. Definitivamente&nbsp; se trata de un material que todo agente de pastoral debe tener.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/10">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Diapositiva2.JPG?itok=N9d_fInB" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Escuela para Padres</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2018 <br>
-                                    S/45.00
-                                </p>
-                                <p>Escuela para Padres, es una recopilación de 7 prédicas que tienen el propósito de orientar a los padres de familia en su delicada labor como guías&nbsp; y tutores de los hijos.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/9">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Diapositiva4.JPG?itok=EtowC0Ja" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Curso Documento de Malinas</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2018 <br>
-                                    S/70.00
-                                </p>
-                                <p>El Documento de Malinas se constituye en el fundamento doctrinal que afianzó a la Renovación Carismática Católica en el seno de la Iglesia, el presente material consta de 10 audios que desarrollan y explican este apasionante documento.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/8">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-12/Diapositiva3.JPG?itok=cWzCthKU" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Curso Discernimiento de Carismas</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2018 <br>
-                                    S/50.00
-                                </p>
-                                <p>El Curso de Discernimiento de Carismas consta de 8 enseñanzas en formato de audio, que nos permiten comprender la importancia y el ejercicio del discernimiento respecto de los carismas.</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-                            
-            <!-- One Fourth (1/4) Column -->
-            <div class="column one-fourth column_icon_box">
-                <div class="icon_box icon_position_top no_border">
-                    <a href="http://willymartinezsanchez.com/producto/2">
-                        <div class="image_wrapper"><img src="http://intranet.willymartinezsanchez.com/sites/default/files/styles/portada_libro_236x348_/public/data/productos/2018-11/burrito.jpg?itok=8V2ZiPgl" alt="" class="scale-with-grid">
-                        </div>
-                        <div class="desc_wrapper">
-                            <div class="desc">
-                                <h3 style="margin: 0">Aquel Burrito de Domingo de Ramos</h3>
-                                <p style="margin: 0 0 5px; font-style: italic;" class="themecolor">
-                                    Formacion, 2016(6) <br>
-                                    S/15.00
-                                </p>
-                                Jesús es un maestro maravilloso; él no eligió ingresar a la Ciudad Santa en un fuerte caballo que daría majestuosidad y le permitiría una entrada espectacular, o mejor aún en un carro tirado por varios caballos para demostrar su poder y autoridad. Jesús eligió un pequeño y simple burrito. Es esperanzador que Dios nos elige a pesar de nuestras debilidades y pequeñeces y nos llama a servirle.
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                        </a>
                     </div>
+                </div>
+                {% if loop.index%4==0 %}
+                    <div class="column one column_divider"><hr class="no_line"></div>
+                {% endif %}
+            
+            {% endfor %}                                      
+        </div>
     </div>
 </div>
