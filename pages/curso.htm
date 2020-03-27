@@ -11,6 +11,8 @@ displayColumn = "id"
 notFoundMessage = "Record not found"
 
 [PermissionsCourse]
+
+[Pasarela]
 ==
 {% set record = builderDetails.record %}
 {% set displayColumn = builderDetails.displayColumn %}
@@ -91,10 +93,7 @@ notFoundMessage = "Record not found"
                         </div>
                         {% endfor %}
                     {% else %}
-                        <a class="button  button_right button_size_2 button_theme button_js kill_the_icon" href="#"> 
-                            <span class="button_icon"><i class="fas fa-cart-arrow-down" style="color: white;"></i></span> 
-                            <span class="button_label">COMPRAR EL CURSO</span> 
-                        </a>
+                        {% component 'Pasarela' %} 
                     {% endif %}
                 </div>
             </div>    

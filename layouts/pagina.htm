@@ -161,6 +161,7 @@ description = "Diseño de pagina"
     <script src="{{ 'assets/js/animations/animations.js'|theme }}"></script>
     <script src="{{ 'assets/js/scripts.js'|theme }}"></script>
     {% framework extras %}
+    {% scripts %}
     <script>
         jQuery(window).load(function() {
             var retina = window.devicePixelRatio > 1 ? true : false;
@@ -173,6 +174,7 @@ description = "Diseño de pagina"
         });
     </script>
     <script async src="https://static.addtoany.com/menu/page.js"></script>
+
 </body>
 
 </html>
