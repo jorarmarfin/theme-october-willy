@@ -93,7 +93,71 @@ notFoundMessage = "Record not found"
                         </div>
                         {% endfor %}
                     {% else %}
-                        {% component 'Pasarela' %} 
+                        <div id="myDiv"></div>
+                        <div class="accordion">
+                            <div class="mfn-acc accordion_wrapper open1st toggle">
+                                <div class="question">
+                                    <div class="title">
+                                        <i class="fa fa-plus acc-icon-plus"></i><i class="fas fa-minus acc-icon-minus"></i>Pagar con tarjeta de Credito o debito
+                                    </div>
+                                    <div class="answer" style="display: none;">
+                                        <p>{% component 'Pasarela' %} </p>
+                                    </div>
+                                </div>
+                                <div class="question">
+                                    <div class="title">
+                                        <i class="fa fa-plus acc-icon-plus"></i><i class="fas fa-minus acc-icon-minus"></i>Deposito Bancario
+                                    </div>
+                                    <div class="answer">
+                                            <p>Puedes hacer un deposito en las siguientes cuentas </p>
+                                            <div class="column mcb-column one-second column_list">
+                                                <div class="list_item lists_2 clearfix">
+                                                    <a href="#">
+                                                        <div class="list_left list_image"><img src="{{'bcp.png'|media}}" class="scale-with-grid" alt="home_betheme_icon_1" width="100" height="100">
+                                                        </div>
+                                                        <div class="list_right">
+                                                            <h4>BCP</h4>
+                                                            <div class="desc">Wilfredo Martinez Sánchez </br>
+                                                                0011-0360-0200692339 CCI: 011-360-000200692339-51
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="column mcb-column one-second column_list">
+                                                <div class="list_item lists_2 clearfix">
+                                                    <a href="#">
+                                                        <div class="list_left list_image"><img src="{{'bbva.jpg'|media}}" class="scale-with-grid" alt="home_betheme_icon_1" width="100" height="100">
+                                                        </div>
+                                                        <div class="list_right">
+                                                            <h4>BBVA</h4>
+                                                            <div class="desc">Wilfredo Elias Martinez Sánchez</br>
+                                                                194-91835070094 CCI:00219419183507009496
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>                                        
+                                    </div>
+                                </div>
+                                <div class="question">
+                                    <div class="title">
+                                        <i class="fa fa-plus acc-icon-plus"></i><i class="fas fa-minus acc-icon-minus"></i>Yapeame al BCP
+                                    </div>
+                                    <div class="answer">
+                                        <p>
+                                            <span class="big">Como yapear con tu cel. <a target="_blank" href="https://www.youtube.com/watch?v=dh_i_D8r5XM">Ejemplo</a> </span>
+                                        </p>
+                                        <p>
+                                            <div class="photo_wrapper">
+                                                <a ><img width="300px" class="scale-with-grid" src="{{ 'qr.jpeg'|media}}" alt="img">
+                                                </a>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                     {% endif %}
                 </div>
             </div>    
