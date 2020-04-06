@@ -1,5 +1,5 @@
 title = "Cursos virtuales"
-url = "/cursos-virtuales"
+url = "/cursos-virtuales/:page?"
 layout = "pagina"
 is_hidden = 0
 
@@ -11,6 +11,7 @@ displayColumn = "id"
 noRecordsMessage = "No records found"
 detailsPage = "-"
 detailsUrlParameter = "id"
+recordsPerPage = 3
 pageNumber = "{{ :page }}"
 ==
 <?php
@@ -28,23 +29,7 @@ function onStart()
 {% set detailsUrlParameter = builderList.detailsUrlParameter %}
 
 
-{% if records.lastPage > 1 %}
-    <ul class="pagination">
-        {% if records.currentPage > 1 %}
-            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; Prev</a></li>
-        {% endif %}
 
-        {% for page in 1..records.lastPage %}
-            <li class="{{ records.currentPage == page ? 'active' : null }}">
-                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
-            </li>
-        {% endfor %}
-
-        {% if records.lastPage > records.currentPage %}
-            <li><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage+1) }) }}">Next &rarr;</a></li>
-        {% endif %}
-    </ul>
-{% endif %}
 <div class="section" style="padding-top:90px; padding-bottom:40px; background-color:#75aaeb">
     <div class="section_wrapper clearfix">
         <div class="items_group clearfix">
@@ -94,6 +79,31 @@ function onStart()
             {% else %}
                 {{ noRecordsMessage }}
             {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="section" style="padding-top:60px; padding-bottom:20px; background-color:#fff">
+    <div class="section_wrapper clearfix">
+        <div class="items_group clearfix">
+            <div class="column one pager_wrapper">
+                <div class="pager">
+                    <div class="pages">
+                    {% if records.lastPage > 1 %}
+                        {% if records.currentPage > 1 %}
+                            <span class="page-numbers current"><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; </a></span>
+                        {% endif %}
+                        {% for page in 1..records.lastPage %}
+                            <span class="page-numbers {{ records.currentPage == page ? 'active' : null }}">
+                                <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
+                            </span>
+                        {% endfor %}
+                        {% if records.lastPage > records.currentPage %}
+                            <span class="page-numbers"><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage+1) }) }}"> &rarr;</a></span>
+                        {% endif %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
