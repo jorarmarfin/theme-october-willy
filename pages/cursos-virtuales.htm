@@ -90,10 +90,10 @@ function onStart()
                     <div class="pages">
                     {% if records.lastPage > 1 %}
                         {% if records.currentPage > 1 %}
-                            <span class="page-numbers current"><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; </a></span>
+                            <span class="page-numbers"><a href="{{ this.page.baseFileName|page({ (pageParam): (records.currentPage-1) }) }}">&larr; </a></span>
                         {% endif %}
                         {% for page in 1..records.lastPage %}
-                            <span class="page-numbers {{ records.currentPage == page ? 'active' : null }}">
+                            <span class="page-numbers {{ records.currentPage == page ? 'current' : null }}">
                                 <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}">{{ page }}</a>
                             </span>
                         {% endfor %}
